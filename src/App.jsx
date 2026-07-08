@@ -239,6 +239,31 @@ export default function App() {
       {/* Main Panel View */}
       {renderTabContent()}
 
+      {/* Mobile Bottom Navigation Bar */}
+      <div className="mobile-nav">
+        <div className={`mobile-nav-link ${activeTab === 'dashboard' ? 'active' : ''}`} onClick={() => setActiveTab('dashboard')}>
+          <i className="fa-solid fa-chart-line"></i>
+          <span>{language === 'ar' ? 'الرئيسية' : 'Dashboard'}</span>
+        </div>
+        <div className={`mobile-nav-link ${activeTab === 'chat' ? 'active' : ''}`} onClick={() => setActiveTab('chat')}>
+          <i className="fa-solid fa-robot"></i>
+          <span>{language === 'ar' ? 'المساعد' : 'AI Assistant'}</span>
+        </div>
+        <div className={`mobile-nav-link ${activeTab === 'incidents' ? 'active' : ''}`} onClick={() => setActiveTab('incidents')}>
+          <i className="fa-solid fa-triangle-exclamation"></i>
+          <span>{language === 'ar' ? 'البلاغات' : 'Alerts'}</span>
+          {incidents.filter(i => i.status !== 'resolved').length > 0 && (
+            <span className="mobile-alert-count">
+              {incidents.filter(i => i.status !== 'resolved').length}
+            </span>
+          )}
+        </div>
+        <div className={`mobile-nav-link ${activeTab === 'analytics' ? 'active' : ''}`} onClick={() => setActiveTab('analytics')}>
+          <i className="fa-solid fa-leaf"></i>
+          <span>{language === 'ar' ? 'البيئة' : 'Eco Analytics'}</span>
+        </div>
+      </div>
+
       {/* Persistent Floating Chatbot widget */}
       <FloatingChatbot 
         lang={language}
