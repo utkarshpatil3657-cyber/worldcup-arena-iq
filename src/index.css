@@ -1712,17 +1712,57 @@ body, .sidebar-panel, .dashboard-card, .metric-card, .btn-primary, .btn-secondar
   }
 
   /* Make view components adjust correctly to full width minus mobile navigation */
+  .ops-grid,
   .ops-dashboard-root, 
   .chat-container, 
   .dispatcher-grid, 
   .analytics-grid {
     height: calc(100vh - 60px) !important;
-    padding-bottom: 12px !important;
+    padding-bottom: 70px !important;
     grid-template-columns: 1fr !important;
     width: 100% !important;
     max-width: 100% !important;
     padding: 16px !important;
     overflow-y: auto !important;
+  }
+
+  /* Responsive Sector Drawer */
+  .sector-drawer {
+    width: 100% !important;
+    right: -100% !important;
+  }
+
+  [dir="rtl"] .sector-drawer {
+    left: -100% !important;
+    right: auto !important;
+  }
+
+  .sector-drawer.open {
+    right: 0 !important;
+  }
+
+  [dir="rtl"] .sector-drawer.open {
+    left: 0 !important;
+    right: auto !important;
+  }
+
+  /* Responsive Floating Chatbot box */
+  .floating-chatbot-box {
+    width: calc(100vw - 32px) !important;
+    max-width: 360px;
+    right: 0 !important;
+    bottom: 70px !important;
+  }
+
+  [dir="rtl"] .floating-chatbot-box {
+    left: 0 !important;
+    right: auto !important;
+  }
+
+  /* Responsive Sustainability waste bin cells grid columns */
+  .waste-grid-vis {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px !important;
   }
 
   /* Adjust Chat views to fit mobile perfectly */
