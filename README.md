@@ -1,3 +1,4 @@
+
 # WorldCup ArenaIQ - Stadium Operations & Fan Experience SaaS
 
 **ArenaIQ** is a premium stadium operations command center and fan concierge dashboard designed for the **FIFA World Cup 2026** at MetLife Stadium. Built with React and styled with clean, high-performance CSS, it integrates generative AI intelligence to support stadium coordinators, volunteers, and fans in real time.
@@ -47,7 +48,7 @@ graph TD
   Sidebar -->|Provide Key| APIKeyState[Gemini API Key: localStorage]
 
   ThemeState -->|DOM data-theme| CSS[CSS Styling Variables]
-  LangState -->|DOM dir="rtl"| RTLMirror[Arabic Layout Mirroring]
+  LangState -->|DOM dir RTL| RTLMirror[Arabic Layout Mirroring]
   LangState -->|Translate UI| TransUtils[translations.js Module]
 
   StadiumSVG -->|Triggers Click| SectorDrawer[Sector details drawer]
