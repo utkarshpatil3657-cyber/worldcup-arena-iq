@@ -426,13 +426,17 @@ Keep your answers concise and directly in the language (${lang}). If you trigger
       {/* Main Chat Window */}
       <div className="chat-window">
         {/* Top Header of the Chat Tab */}
-        <header className="top-header" style={{ height: '60px', borderBottom: '1px solid var(--border-color)', padding: '0 24px', flexShrink: 0 }}>
+        <header className="top-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid var(--border-color)', paddingBottom: '16px', marginBottom: '20px' }}>
           <div className="header-title-section">
-            <h2 style={{ fontSize: '1.2rem', fontFamily: 'var(--font-headings)' }}>{t.aiConcierge}</h2>
+            <div className="badge-world-cup">
+              <i className="fa-solid fa-robot"></i>
+              <span>{t.fifaWorldCup}</span>
+            </div>
+            <h2>{t.aiConcierge}</h2>
           </div>
           
           {/* Gemini API Key input in header */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', backgroundColor: '#f1f5f9', padding: '6px 12px', borderRadius: '20px', border: '1px solid var(--border-color)' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', backgroundColor: 'var(--bg-card)', padding: '6px 12px', borderRadius: '20px', border: '1px solid var(--border-color)' }}>
             <i className="fa-solid fa-key" style={{ color: 'var(--color-sports-blue)', fontSize: '0.8rem' }}></i>
             <span style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-secondary)' }}>
               {lang === 'ar' ? 'مفتاح Gemini:' : 'Gemini Key:'}
