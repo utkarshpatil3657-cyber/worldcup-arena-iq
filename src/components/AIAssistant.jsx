@@ -10,10 +10,12 @@ export default function AIAssistant({
   addIncident, 
   lang,
   geminiApiKey,
+  setGeminiApiKey,
   handleAIResponseCommand
 }) {
   const [role, setRole] = useState('fan'); // fan, volunteer, staff
   const [input, setInput] = useState('');
+  const [showKey, setShowKey] = useState(false);
   const t = translations[lang] || translations.en;
 
   const [messages, setMessages] = useState([
@@ -423,6 +425,56 @@ Keep your answers concise and directly in the language (${lang}). If you trigger
 
       {/* Main Chat Window */}
       <div className="chat-window">
+        {/* Top Header of the Chat Tab */}
+        <header className="top-header" style={{ height: '60px', borderBottom: '1px solid var(--border-color)', padding: '0 24px', flexShrink: 0 }}>
+          <div className="header-title-section">
+            <h2 style={{ fontSize: '1.2rem', fontFamily: 'var(--font-headings)' }}>{t.aiConcierge}</h2>
+          </div>
+          
+          {/* Gemini API Key input in header */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', backgroundColor: '#f1f5f9', padding: '6px 12px', borderRadius: '20px', border: '1px solid var(--border-color)' }}>
+            <i className="fa-solid fa-key" style={{ color: 'var(--color-sports-blue)', fontSize: '0.8rem' }}></i>
+            <span style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-secondary)' }}>
+              {lang === 'ar' ? 'مفتاح Gemini:' : 'Gemini Key:'}
+            </span>
+            <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
+              <input 
+                type={showKey ? "text" : "password"}
+                style={{
+                  border: 'none',
+                  background: 'transparent',
+                  fontSize: '0.75rem',
+                  outline: 'none',
+                  width: '140px',
+                  color: 'var(--text-primary)',
+                  paddingInlineEnd: '20px'
+                }}
+                placeholder={lang === 'ar' ? 'أدخل مفتاح API' : 'Enter API Key'}
+                value={geminiApiKey}
+                onChange={(e) => setGeminiApiKey(e.target.value)}
+              />
+              <button 
+                type="button"
+                style={{
+                  position: 'absolute',
+                  right: lang === 'ar' ? 'auto' : '0',
+                  left: lang === 'ar' ? '0' : 'auto',
+                  background: 'none',
+                  border: 'none',
+                  color: 'var(--text-muted)',
+                  cursor: 'pointer',
+                  fontSize: '0.7rem',
+                  display: 'flex',
+                  alignItems: 'center'
+                }}
+                onClick={() => setShowKey(!showKey)}
+              >
+                <i className={showKey ? "fa-solid fa-eye-slash" : "fa-solid fa-eye"}></i>
+              </button>
+            </div>
+          </div>
+        </header>
+
         {/* API Key Missing Info Banner */}
         {!geminiApiKey && (
           <div style={{ 
@@ -439,8 +491,8 @@ Keep your answers concise and directly in the language (${lang}). If you trigger
             <i className="fa-solid fa-circle-info"></i>
             <span>
               {lang === 'ar' 
-                ? 'وضع محاكاة المساعد نشط. أدخل مفتاح Google AI Studio API في إعدادات الشريط الجانبي لتفعيل الردود الفورية الحقيقية.'
-                : 'Chatbot simulation active. Configure a Google AI Studio API Key in the Sidebar Settings to enable actual live Gemini responses!'}
+                ? 'وضع محاكاة المساعد نشط. أدخل مفتاح Google AI Studio API في الأعلى لتفعيل الردود الفورية الحقيقية.'
+                : 'Chatbot simulation active. Configure a Google AI Studio API Key in the top header to enable actual live Gemini responses!'}
             </span>
           </div>
         )}

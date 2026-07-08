@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { translations } from '../utils/translations';
 
 export default function Sidebar({
@@ -8,11 +8,8 @@ export default function Sidebar({
   lang,
   setLang,
   theme,
-  setTheme,
-  geminiApiKey,
-  setGeminiApiKey
+  setTheme
 }) {
-  const [showKey, setShowKey] = useState(false);
   const t = translations[lang] || translations.en;
 
   return (
@@ -102,46 +99,6 @@ export default function Sidebar({
             <option value="modern">{t.modern}</option>
             <option value="classic">{t.classic}</option>
           </select>
-        </div>
-
-        {/* Gemini API Key input */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', marginTop: '6px' }}>
-          <label style={{ fontSize: '0.65rem', color: '#94a3b8', fontWeight: 600 }}>
-            {lang === 'ar' ? 'مفتاح Google AI Studio' : 'Google AI Studio Key'}
-          </label>
-          <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
-            <input 
-              type={showKey ? "text" : "password"} 
-              className="sidebar-select"
-              style={{ 
-                paddingInlineEnd: '30px', 
-                color: 'white', 
-                background: 'rgba(255, 255, 255, 0.1)', 
-                border: '1px solid rgba(255,255,255,0.15)' 
-              }}
-              placeholder={lang === 'ar' ? 'أدخل مفتاح API هنا' : 'Enter API Key'}
-              value={geminiApiKey}
-              onChange={(e) => setGeminiApiKey(e.target.value)}
-            />
-            <button 
-              type="button" 
-              style={{ 
-                position: 'absolute', 
-                right: lang === 'ar' ? 'auto' : '8px', 
-                left: lang === 'ar' ? '8px' : 'auto',
-                background: 'none', 
-                border: 'none', 
-                color: '#94a3b8', 
-                cursor: 'pointer', 
-                fontSize: '0.8rem',
-                display: 'flex',
-                alignItems: 'center'
-              }}
-              onClick={() => setShowKey(!showKey)}
-            >
-              <i className={showKey ? "fa-solid fa-eye-slash" : "fa-solid fa-eye"}></i>
-            </button>
-          </div>
         </div>
       </div>
       

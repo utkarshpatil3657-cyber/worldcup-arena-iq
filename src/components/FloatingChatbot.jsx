@@ -12,11 +12,13 @@ export default function FloatingChatbot({
   onClearBin,
   activeTab,
   geminiApiKey,
+  setGeminiApiKey,
   handleAIResponseCommand
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [role, setRole] = useState('staff'); // Default to staff for operations command
   const [input, setInput] = useState('');
+  const [showKey, setShowKey] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
   const [typingThought, setTypingThought] = useState('');
   const messagesEndRef = useRef(null);
@@ -333,20 +335,62 @@ Keep your answers concise and directly in the language (${lang}). If you trigger
               <div style={{ 
                 backgroundColor: 'var(--color-warning-light)', 
                 border: '1px solid var(--color-warning)', 
-                padding: '8px 12px', 
-                fontSize: '0.72rem',
-                color: 'var(--color-warning)',
-                fontWeight: 600,
+                padding: '10px 14px', 
                 borderRadius: 'var(--radius-sm)',
                 display: 'flex',
-                alignItems: 'center',
-                gap: '6px'
+                flexDirection: 'column',
+                gap: '8px'
               }}>
-                <i className="fa-solid fa-circle-info"></i>
-                <span>
-                  {lang === 'ar' 
-                    ? 'وضع محاكاة المساعد نشط. أدخل مفتاح API لتفعيل الذكاء الاصطناعي الحقيقي.'
-                    : 'Simulation active. Enter an API Key in the settings to activate real Gemini responses.'}
+                <div style={{ fontSize: '0.72rem', color: 'var(--color-warning)', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  <i className="fa-solid fa-circle-info"></i>
+                  <span>
+                    {lang === 'ar' 
+                      ? 'وضع المحاكاة نشط. أدخل مفتاح API لتفعيل الذكاء الاصطناعي الحقيقي:'
+                      : 'Simulation active. Enter Gemini API Key to enable real AI:'}
+                  </span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px', position: 'relative' }}>
+                  <input 
+                    type={showKey ? "text" : "password"}
+                    placeholder={lang === 'ar' ? 'مفتاح AI Studio' : 'AI Studio Key'}
+                    style={{
+                      flex: 1,
+                      fontSize: '0.7rem',
+                      padding: '4px 28px 4px 8px',
+                      borderRadius: '4px',
+                      border: '1px solid var(--color-warning)',
+                      outline: 'none',
+                      background: '#ffffff',
+                      color: '#000000',
+                      width: '100%'
+                    }}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') {
+                        setGeminiApiKey(e.target.value);
+                        addToast(lang === 'ar' ? 'تم حفظ مفتاح API بنجاح!' : 'Gemini API Key saved successfully!');
+                      }
+                    }}
+                  />
+                  <button
+                    type="button"
+                    style={{
+                      position: 'absolute',
+                      right: '8px',
+                      background: 'none',
+                      border: 'none',
+                      cursor: 'pointer',
+                      color: 'var(--color-warning)',
+                      fontSize: '0.7rem',
+                      display: 'flex',
+                      alignItems: 'center'
+                    }}
+                    onClick={() => setShowKey(!showKey)}
+                  >
+                    <i className={showKey ? "fa-solid fa-eye-slash" : "fa-solid fa-eye"}></i>
+                  </button>
+                </div>
+                <span style={{ fontSize: '0.62rem', color: 'var(--text-secondary)' }}>
+                  {lang === 'ar' ? 'اضغط Enter لحفظ المفتاح' : 'Press Enter to save API key'}
                 </span>
               </div>
             )}

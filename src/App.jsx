@@ -189,6 +189,7 @@ export default function App() {
             addIncident={addIncident}
             lang={language}
             geminiApiKey={geminiApiKey}
+            setGeminiApiKey={setGeminiApiKey}
             handleAIResponseCommand={handleAIResponseCommand}
           />
         );
@@ -248,6 +249,7 @@ export default function App() {
         onClearBin={handleClearBin}
         activeTab={activeTab}
         geminiApiKey={geminiApiKey}
+        setGeminiApiKey={setGeminiApiKey}
         handleAIResponseCommand={handleAIResponseCommand}
       />
 
