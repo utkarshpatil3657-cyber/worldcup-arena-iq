@@ -1,0 +1,6 @@
+{
+  "appId": "com.worldcup.arenaiq",
+  "appName": "WorldCup ArenaIQ",
+  "webDir": "dist",
+  "bundledWebRuntime": false
+}
